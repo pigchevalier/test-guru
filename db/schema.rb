@@ -15,29 +15,29 @@ ActiveRecord::Schema.define(version: 2021_11_26_111232) do
   create_table "answers", force: :cascade do |t|
     t.string "text", null: false
     t.boolean "correct", default: false, null: false
-    t.integer "id_question_id", null: false
-    t.integer "id_user_id", null: false
+    t.integer "question_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id_question_id"], name: "index_answers_on_id_question_id"
-    t.index ["id_user_id"], name: "index_answers_on_id_user_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "id_test_id", null: false
+    t.integer "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id_test_id"], name: "index_categories_on_id_test_id"
+    t.index ["test_id"], name: "index_categories_on_test_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "text", null: false
     t.string "answer", null: false
-    t.integer "id_test_id", null: false
+    t.integer "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id_test_id"], name: "index_questions_on_id_test_id"
+    t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -51,15 +51,15 @@ ActiveRecord::Schema.define(version: 2021_11_26_111232) do
     t.string "name", null: false
     t.string "password"
     t.boolean "access_admin", null: false
-    t.integer "id_test_id", null: false
+    t.integer "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id_test_id"], name: "index_users_on_id_test_id"
+    t.index ["test_id"], name: "index_users_on_test_id"
   end
 
-  add_foreign_key "answers", "id_questions"
-  add_foreign_key "answers", "id_users"
-  add_foreign_key "categories", "id_tests"
-  add_foreign_key "questions", "id_tests"
-  add_foreign_key "users", "id_tests"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
+  add_foreign_key "categories", "tests"
+  add_foreign_key "questions", "tests"
+  add_foreign_key "users", "tests"
 end
