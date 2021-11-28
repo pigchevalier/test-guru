@@ -1,5 +1,5 @@
 module TestGuru
   class Application < Rails::Application
-    VERSION = "0.1.2".freeze
+    VERSION = "0.2.3".freeze
   end
 end
