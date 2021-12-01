@@ -7,7 +7,6 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
 
-  #поскольку это инстанс метод, а не метод класса, он не переделывается в scope
   def tests_by_level(level)
     tests.where(level: level) 
   end
