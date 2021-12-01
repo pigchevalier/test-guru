@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :tests, through: :results
 
+  validates :name, :email, presence: true
+
+  #поскольку это инстанс метод, а не метод класса, он не переделывается в scope
   def tests_by_level(level)
     tests.where(level: level) 
   end
