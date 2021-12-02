@@ -5,7 +5,7 @@ class Answer < ApplicationRecord
 
   scope :correct, -> { where(correct: true) }
 
-  validate :validate_max_count_of_answers_create
+  validate :validate_max_count_of_answers_create, on: :create
   
   def validate_max_count_of_answers_create
     errors.add(:question) if question.answers.count >= 4
