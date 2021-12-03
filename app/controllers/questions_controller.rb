@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   def new; end
 
   def create
-    @question = @test.questions.build(params.require(:question).permit(:text))
+    @question = @test.questions.build(params_text)
     if @question.save
       redirect_to @question
     else
@@ -23,10 +23,6 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    #redirect_to @question.test перенаправит на /test/test_id
-    #но он не определен и хочется перенаправить на /test/test_id/questions
-    #а использовать redirect_to @question.test.questions нельзя тк невозможно перенаправить to_model
-    #поэтому использую здесь именно путь
     redirect_to test_questions_path(@question.test)
   end
 
@@ -42,6 +38,10 @@ class QuestionsController < ApplicationController
 
   def rescue_with_question_not_found
     render plain: 'Question was not found'
+  end
+
+  def params_text
+    params.require(:question).permit(:text)
   end
 
 end
