@@ -8,23 +8,26 @@ class QuestionsController < ApplicationController
     render plain: @test.questions.all.inspect
   end
 
-  def show
-    
-  end
+  def show; end
 
-  def new
-
-  end
+  def new; end
 
   def create
-    Question.create!(text: params.dig(:question, :text), test: @test)
-    redirect_to test_questions_path
+    @question = @test.questions.build(params.require(:question).permit(:text))
+    if @question.save
+      redirect_to @question
+    else
+      render :new
+    end
   end
 
   def destroy
-    test_id = Question.find(params[:id]).test_id
-    Question.find(params[:id]).destroy
-    redirect_to test_questions_path(test_id: test_id)
+    @question.destroy
+    #redirect_to @question.test перенаправит на /test/test_id
+    #но он не определен и хочется перенаправить на /test/test_id/questions
+    #а использовать redirect_to @question.test.questions нельзя тк невозможно перенаправить to_model
+    #поэтому использую здесь именно путь
+    redirect_to test_questions_path(@question.test)
   end
 
   private
