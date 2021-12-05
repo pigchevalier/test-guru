@@ -5,9 +5,7 @@ class TestsController < ApplicationController
     @tests = Test.all
   end
 
-  def show
-    redirect_to test_questions_path(@test)
-  end
+  def show; end
 
   private
 
