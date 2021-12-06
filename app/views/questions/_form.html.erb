@@ -1,0 +1,12 @@
+<% #url: [@test, @question] %>
+<%= form_with model: [@test, @question], local: true do |form| %>
+  <%= render 'shared/errors', resource: @question %>
+
+  <p>
+    <%= form.label :text %><br>
+    <%= form.text_field :text, id: :question_text %>
+  </p>
+
+  <p><%= form.submit %></p>
+
+<% end %>

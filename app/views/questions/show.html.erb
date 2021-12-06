@@ -1,3 +1,17 @@
-<%= render plain: @question.inspect %>
-<br>
-<%= link_to "Destroy", question_path(@question), method: :delete %>
+
+<h1>question</h1>
+<table>
+  <tr>
+    <th>Text</th>
+  </tr>
+
+  <tr>
+    <td>  <%= @question.text %></td>
+  </tr>
+</table> 
+<%= link_to 'Edit', edit_question_path(@question) %>
+<%= link_to "Destroy",
+                @question, 
+                method: :delete, 
+                data: { confirm: 'Are sure?' }%>   
+<%= link_to 'Back', @question.test %>
