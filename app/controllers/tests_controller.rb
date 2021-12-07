@@ -1,11 +1,17 @@
 class TestsController < ApplicationController
-  before_action :find_test, only: [:show]
+  before_action :find_test, only: [:show, :start]
 
   def index
     @tests = Test.all
   end
 
   def show; end
+
+  def start
+    @user = User.first
+    @user.tests.push(@test)
+    redirect_to @user.result(@test)
+  end
 
   private
 
