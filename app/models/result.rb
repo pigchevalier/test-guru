@@ -6,6 +6,8 @@ class Result < ApplicationRecord
   before_validation :before_validation_set_first_question, on: :create
   before_validation :next_question , on: :update
 
+  PASSING_SCORE = 0.85.freeze
+
   def completed?
     current_question.nil?
   end
@@ -19,7 +21,7 @@ class Result < ApplicationRecord
   end
 
   def successful?
-    correct_questions/test.questions.count >= 0.85 
+    correct_questions/test.questions.count >= PASSING_SCORE
   end
 
   def number_of_current_question
