@@ -12,8 +12,8 @@
     </p>
   <% end %>
 
-  <p>Number of current question: <%= @result.test.questions.order(:id).where('id < :id', id: @result.current_question.id).count + 1  %></p>
-  <p>Total count of questions: <%= @result.test.questions.count %></p>
+  <p>Number of current question: <%= @result.number_of_current_question %></p>
+  <p>Total count of questions: <%=  @result.count_all_questions %></p>
 
   <p><%= form.submit 'Next' %></p>
 <% end %>

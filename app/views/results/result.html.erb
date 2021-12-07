@@ -1,2 +1,2 @@
-<h1 style="color: <%= @result.correct_questions/@result.test.questions.count >= 0.85 ? " green" : " red" %>">the <%= @result.test.title %> <%= @result.correct_questions/@result.test.questions.count >= 0.85 ? "Test was Completed" : "Test wasn't Completed" %></h1>
+<h1 style="color: <%= @result.successful? ? " green" : " red" %>">the <%= @result.test.title %> <%= @result.successful? ? "Test was Completed" : "Test wasn't Completed" %></h1>
 <%= link_to 'Back', tests_path %>

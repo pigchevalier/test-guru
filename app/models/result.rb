@@ -18,6 +18,18 @@ class Result < ApplicationRecord
     save!
   end
 
+  def successful?
+    correct_questions/test.questions.count >= 0.85 
+  end
+
+  def number_of_current_question
+    test.questions.order(:id).where('id < :id', id: current_question.id).count + 1  
+  end
+
+  def count_all_questions
+    test.questions.count
+  end
+
   private
 
   def before_validation_set_first_question
@@ -25,11 +37,7 @@ class Result < ApplicationRecord
   end
 
   def correct_answer?(answer_ids)
-    if answer_ids.nil?
-      correct_answers.count == 0 
-    else
-      correct_answers.ids.sort == answer_ids.map(&:to_i).sort
-    end
+    correct_answers.ids.sort == answer_ids.to_a.map(&:to_i).sort
   end
 
   def correct_answers
