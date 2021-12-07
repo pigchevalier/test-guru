@@ -5,7 +5,9 @@ class User < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :tests, through: :results
 
-  validates :name, :email, presence: true
+  validates :email, uniqueness: true, presence: true, format: { with: /.+[@].+[.].+/, message: "only email allows"}
+
+  has_secure_password
 
   def tests_by_level(level)
     tests.where(level: level) 

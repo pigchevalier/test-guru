@@ -1,4 +1,5 @@
 class TestsController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_test, only: [:show, :start]
 
   def index
@@ -8,7 +9,7 @@ class TestsController < ApplicationController
   def show; end
 
   def start
-    @user = User.first
+    @user = User.find(session[:user_id])
     @user.tests.push(@test)
     redirect_to @user.result(@test)
   end
