@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :tests, through: :results
 
-  validates :email, uniqueness: true, presence: true, format: { with: /.+[@].+[.].+/, message: "only email allows"}
+  validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only email allows"}
 
   has_secure_password
 

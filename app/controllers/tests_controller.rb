@@ -9,7 +9,7 @@ class TestsController < ApplicationController
   def show; end
 
   def start
-    @user = User.find(session[:user_id])
+    @user = current_user
     @user.tests.push(@test)
     redirect_to @user.result(@test)
   end

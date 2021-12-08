@@ -1,3 +1,5 @@
 module FlashHelper
-  #я не поняла что именно требуется в задании "Создайте хэлпер для flash сообщений"
+  def flash_message (type, msg)
+    content_tag :div, msg, class: "flash #{type}"
+  end
 end
