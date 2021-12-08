@@ -11,7 +11,6 @@
   </head>
 
   <body>
-    <%= flash_message(:notice, 'flash notice') %>
     <p class="nav user"><%= link_to "test-guru", root_path %></p>
     <% if logged_in? %>
       <p class="nav user">Welcome, <b><%= current_user.email %></b> Guru</p>
