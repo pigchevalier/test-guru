@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   root to: "tests#index"
 
-  devise_for :users, path_names: { sign_in: :login, sign_out: :logout }, controllers: {registrations: "registrations"}
+  devise_for :users, path_names: { sign_in: :login, sign_out: :logout }
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -20,9 +20,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'users/name', to: 'users#edit'
-  patch 'users/name', to: 'users#update'
-  put 'users/name', to: 'users#update'
 
   namespace :admin do
     resources :tests do 

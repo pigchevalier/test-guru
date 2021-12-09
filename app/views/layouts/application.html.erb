@@ -18,8 +18,8 @@
       </p>
     <% end %>
     <p class="nav user"><%= link_to "test-guru", root_path %></p>
-    <%= flash_message(:notice) if flash[:notice].present? %>
-    <%= flash_message(:alert) if flash[:alert].present? %>
+    <%= flash_message(:notice) %>
+    <%= flash_message(:alert)%>
 
     <%= yield %>
   </body>

@@ -1,7 +1,6 @@
 class Admin::TestsController < Admin::BaseController
 
   before_action :find_test, only: [:show, :edit, :destroy, :update]
-  before_action :find_category, only: [:create]
 
   def index
     @tests = Test.all
@@ -25,8 +24,7 @@ class Admin::TestsController < Admin::BaseController
   end
 
   def create
-    @test = @category.tests.build(test_params)
-    @test.author = current_user
+    @test = current_user.created_tests.build(test_params)
 
     if @test.save
       redirect_to admin_test_path(@test)
@@ -46,11 +44,7 @@ class Admin::TestsController < Admin::BaseController
     @test = Test.find(params[:id])
   end
 
-  def find_category
-    @category = Category.find(params[:test][:category_id])
-  end
-
   def test_params
-    params.require(:test).permit(:title, :level)
+    params.require(:test).permit(:title, :level, :category_id)
   end
 end
