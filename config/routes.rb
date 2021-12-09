@@ -1,20 +1,13 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-  get 'users/new'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
   root to: "tests#index"
 
-  get :signup, to: 'users#new'
-  get :login, to: 'sessions#new'
-  delete :logout, to: 'sessions#delete'
+  devise_for :users, path_names: { sign_in: :login, sign_out: :logout }, controllers: {registrations: "registrations"}
 
-  resources :users, only: :create
-  resources :sessions, only: :create
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :tests do
-    resources :questions, shallow: true, except: :index do
-      resources :answers, shallow: true, except: :index
-    end
+  resources :tests, only: :index do
+    
 
     member do
       post :start
@@ -27,4 +20,15 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'users/name', to: 'users#edit'
+  patch 'users/name', to: 'users#update'
+  put 'users/name', to: 'users#update'
+
+  namespace :admin do
+    resources :tests do 
+      resources :questions, shallow: true, except: :index do
+        resources :answers, shallow: true, except: :index
+      end
+    end
+  end
 end

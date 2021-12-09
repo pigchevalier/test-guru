@@ -1,0 +1,16 @@
+<%= form_with model: [current_user],url: users_name_path, local: true do |form| %>
+  <%= render 'shared/errors', resource: current_user %>
+<h1>If you are admin fill your First name and Last name</h1>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name, id: :current_user_first_name %>
+  </p>
+
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name, id: :current_user_last_name %>
+  </p>
+
+  <p><%= form.submit %></p>
+
+<% end %>

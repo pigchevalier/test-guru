@@ -1,23 +1,18 @@
-class UsersController < ApplicationController
-  
-  def new
-    @user = User.new
-  end
+class UsersController < ActionController::Base
 
-  def create
-    @user = User.new(user_params)
+  before_action :authenticate_user!
 
-    if @user.save
-      redirect_to tests_path
-      session[:user_id] = @user.id
+  def edit; end
+
+  def update
+    if params[:user][:first_name].present? && params[:user][:last_name].present?
+      current_user.update(params.require(:user).permit(:first_name, :last_name))
+      current_user.update(type: Admin)
+      redirect_to admin_tests_path
+
     else
-      render :new
+      redirect_to root_path
     end
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  end
 end
