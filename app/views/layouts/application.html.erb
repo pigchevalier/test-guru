@@ -11,6 +11,15 @@
   </head>
 
   <body>
+    <p class="nav user"><%= link_to "test-guru", root_path %></p>
+    <% if logged_in? %>
+      <p class="nav user">Welcome, <b><%= current_user.email %></b> Guru</p>
+      <p class="nav user"><%= link_to "Logout", logout_path, method: :delete %></p>   
+    <% else %>
+      <p class="nav user"><%= link_to "signup", signup_path %></p>
+      <p class="nav user"><%= link_to "login", login_path %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 

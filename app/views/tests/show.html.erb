@@ -25,4 +25,9 @@
   <%= render @test.questions %>
 </table> 
 <%= link_to 'Create', new_test_question_path(@test) %>
+<%= link_to 'Edit', edit_test_path(@test) %>
+<%= link_to "Destroy",
+                @test, 
+                method: :delete, 
+                data: { confirm: 'Are sure?' }%>   
 <%= link_to 'Back', tests_path %>
