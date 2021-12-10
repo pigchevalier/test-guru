@@ -1,2 +1,9 @@
 ru:
   hello: "Hello world"
+
+  results:
+    gist:
+      success: "Gist успешно сохранен!"
+      failure: "Во время сохранения gist произошла ошибка"
+  question_about: "Вопрос о"
+  from: "от TestGuru"

@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  results:
+    gist:
+      success: "Gist was successfully save!"
+      failure: "Error while saving gist"
+  question_about: "A question about"
+  from: "from TestGuru"
