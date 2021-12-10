@@ -1,8 +1,7 @@
 ru:
   hello: "Hello world"
-
-  results:
-    gist:
+  gists:
+    create:
       success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка"
   question_about: "Вопрос о"
