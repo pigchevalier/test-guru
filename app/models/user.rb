@@ -9,6 +9,7 @@ class User < ApplicationRecord
   #если юзер то пройденные тесты через таблицу
   has_many :results, dependent: :destroy
   has_many :tests, through: :results
+  has_many :gists, dependent: :destroy
 
   validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only email allows"}
 
