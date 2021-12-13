@@ -6,3 +6,7 @@ ru:
       failure: "Во время сохранения gist произошла ошибка"
   question_about: "Вопрос о"
   from: "от TestGuru"
+  admin:
+    tests:
+      form_inline:
+        submit: "OK"
