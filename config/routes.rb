@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users_badges, only: [:index]
+
 
   namespace :admin do
     resources :tests do 
@@ -29,5 +31,6 @@ Rails.application.routes.draw do
         resources :answers, shallow: true, except: :index
       end
     end
+    resources :badges
   end
 end

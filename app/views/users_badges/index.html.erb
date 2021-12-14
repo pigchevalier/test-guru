@@ -1,0 +1,17 @@
+<h1>Badges</h1>
+
+<%= render 'shared/errors', resource: @badge %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Image</th>
+    <th>Rule</th>
+    <th>Content of rule</th>
+    <th>Received</th>
+  </tr>
+
+  <%= render partial: 'users_badges/users_badge', collection: @users_badges %>
+</table> 
+
+<%= link_to 'Back', tests_path %>

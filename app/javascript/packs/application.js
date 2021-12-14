@@ -13,6 +13,7 @@ import "utilites/sorting"
 import "utilites/password_matching"
 import "utilites/form_inline"
 import "utilites/progress_bar"
+import "utilites/badge_create"
 
 Rails.start()
 Turbolinks.start()

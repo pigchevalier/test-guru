@@ -5,6 +5,7 @@ class Test < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :results, dependent: :destroy
   has_many :users, through: :results
+  has_many :badges, dependent: :destroy
 
   validates :title, presence: true, uniqueness: { scope: :level }
   validates :level, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, presence: true

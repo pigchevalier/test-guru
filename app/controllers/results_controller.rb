@@ -10,6 +10,7 @@ class ResultsController < ApplicationController
     @result.accept!(params[:answer_ids])
 
     if @result.completed?
+      current_user.new_badge?(@result) if @result.successful?
       redirect_to result_result_path(@result)
     else
       render :show

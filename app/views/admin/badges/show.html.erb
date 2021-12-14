@@ -1,0 +1,24 @@
+<h1>Badge</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Image</th>
+    <th>Rule</th>
+    <th>Content of rule</th>
+  </tr>
+
+  <tr>
+    <td><%= @badge.title %></td>
+    <td><%= @badge.image %></td>
+    <td><%= @badge.rule %></td>
+    <td><%= @badge.show_rule %></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_admin_badge_path(@badge) %>
+<%= link_to "Destroy",
+                admin_badge_path(@badge), 
+                method: :delete, 
+                data: { confirm: 'Are sure?' }%>   
+<%= link_to 'Back', admin_badges_path %>
