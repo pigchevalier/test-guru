@@ -1,11 +1,10 @@
 class Admin::TestsController < Admin::BaseController
 
-  before_action :find_test, only: [:show, :edit, :destroy, :update]
+  before_action :find_test, only: [:show, :edit, :destroy, :update, :update_inline]
+  before_action :find_tests, only: [:index, :update_inline]
+  before_action :find_gists, only: [:index, :update_inline]
 
-  def index
-    @tests = Test.all
-    @gists = Gist.all
-  end
+  def index; end
 
   def show; end
 
@@ -18,9 +17,17 @@ class Admin::TestsController < Admin::BaseController
 
   def update
     if @test.update(test_params)
-      redirect_to @test
+      redirect_to admin_test_path(@test)
     else
       render :edit
+    end
+  end
+
+  def update_inline
+    if @test.update(test_params)
+      redirect_to admin_tests_path
+    else
+      render :index
     end
   end
 
@@ -34,7 +41,7 @@ class Admin::TestsController < Admin::BaseController
     end
   end
 
-   def destroy
+  def destroy
     @test.destroy
     redirect_to admin_tests_path
   end
@@ -47,5 +54,13 @@ class Admin::TestsController < Admin::BaseController
 
   def test_params
     params.require(:test).permit(:title, :level, :category_id)
+  end
+
+  def find_tests
+    @tests = Test.all
+  end
+
+  def find_gists
+    @gists = Gist.all
   end
 end

@@ -15,6 +15,9 @@
   <p>Number of current question: <%= @result.number_of_current_question %></p>
   <p>Total count of questions: <%=  @result.count_all_questions %></p>
 
+  <label for="test-progress">Progress:</label>
+  <progress id="test-progress" class= "progress-bar" value=0 data-progress-status= <%= @result.number_of_current_question %> data-progress-max= <%= @result.count_all_questions %>>%</progress>
+
   <p><%= link_to 'Gist Question', gists_path(@result), method: :post %></p>
-  <p><%= form.submit 'Next' %></p>
+  <p ><%= form.submit 'Next', class: "test-progress-btn"%></p>
 <% end %>

@@ -37,3 +37,7 @@ en:
       failure: "Error while saving gist"
   question_about: "A question about"
   from: "from TestGuru"
+  admin:
+    tests:
+      form_inline:
+        submit: "OK"
