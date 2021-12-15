@@ -1,6 +1,4 @@
 class Badge < ApplicationRecord
-  RULES = ['All test whith Level', 'All test from Category', 'successeful Test', 'first try successeful Test'].freeze
-
   enum rule: %i[category level test test_first_try]
 
   has_many :users_badges, dependent: :destroy
