@@ -13,27 +13,12 @@
 
   <p>
     <%= form.label :rule %><br>
-    <%= form.collection_select :rule, Admin::BadgesController::RULES ,:to_s , :to_s, prompt: true %>
+    <%= form.collection_select :rule, Badge::RULES ,:to_s , :to_s, prompt: true %>
   </p>
 
-  <p class='badge-level hide'>
-    <%= form.label :level %><br>
-    <%= form.number_field :level, id: :badge_level %>
-  </p>
-
-  <p class='badge-category hide'>
-    <%= form.label :category_id %><br>
-    <%= form.collection_select :category_id, Category.all, :id, :title, prompt: true %>
-  </p>
-
-  <p class='badge-test hide'>
-    <%= form.label :test_id %><br>
-    <%= form.collection_select :test_id, Test.all, :id, :title, prompt: true %>
-  </p>
-
-  <p class='badge-test hide'>
-    <%= form.label :first_try %><br>
-    <%= form.check_box :first_try, id: :badge_first_try %>
+  <p>
+    <%= form.label :parameter %><br>
+    <%= form.text_field :parameter, id: :badge_parameter %>
   </p>
 
   <p><%= form.submit %></p>

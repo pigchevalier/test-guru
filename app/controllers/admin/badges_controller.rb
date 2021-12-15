@@ -2,7 +2,7 @@ class Admin::BadgesController < ApplicationController
 
   before_action :find_badge, only: [:show, :edit, :destroy, :update]
 
-  RULES = ['Level', 'Category', 'Test'].freeze
+
 
   def index
     @badges = Badge.all
@@ -46,7 +46,7 @@ class Admin::BadgesController < ApplicationController
   end
 
   def badge_params
-    params.require(:badge).permit(:title, :image, :rule, :level, :category_id, :test_id, :first_try)
+    params.require(:badge).permit(:title, :image, :rule, :parameter)
   end
 
 end

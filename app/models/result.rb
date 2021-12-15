@@ -25,7 +25,9 @@ class Result < ApplicationRecord
       self.successful = true 
       save(validate: false)
       true
-    end    
+    else
+      false
+    end 
   end
 
   def number_of_current_question
