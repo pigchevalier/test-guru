@@ -1,8 +1,5 @@
 class Admin::BadgesController < ApplicationController
-
   before_action :find_badge, only: [:show, :edit, :destroy, :update]
-
-
 
   def index
     @badges = Badge.all

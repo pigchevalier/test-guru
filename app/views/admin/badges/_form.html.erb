@@ -13,7 +13,7 @@
 
   <p>
     <%= form.label :rule %><br>
-    <%= form.collection_select :rule, Badge::RULES ,:to_s , :to_s, prompt: true %>
+    <%= form.collection_select :rule, Badge.rules.keys ,:to_s , :to_s, prompt: true %>
   </p>
 
   <p>

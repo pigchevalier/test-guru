@@ -1,55 +1,58 @@
 class GettingBadge
-  def new_badge?(result, user)
+  def new_badge(result, user)
     @result = result
     @user = user
     Badge.all.each do |badge|
-      if badge.rule == 'All test whith Level' 
-        new_badge_level?(badge)
-      elsif  badge.rule == 'All test from Category' 
-        new_badge_category?(badge)
-      elsif  badge.rule == 'successeful Test' 
-        new_badge_test?(badge)
-      elsif  badge.rule == 'first try successeful Test' 
-        new_badge_test_first_try?(badge)
-      end
+      add_new_badge(badge) if send("#{badge.rule}?", badge)
     end
   end
 
   private
 
-  #поскольку условие было что пользователь может получать один и тот же бэйдж много раз, то
-  # бэйдж добавляется каждый раз когда выполняется условие (например пройдены все тесты из категории 
-  # и пользователь успешно перепроходит тест из этой категории ему снова добавляется этот же бэйдж)
-
-  def new_badge_level?(badge)
+  def level?(badge)    
     if @result.test.level == badge.parameter.to_i && @result.successful?
+      count_badge = @user.badges.where(id: badge.id).count
       current_level_successful = []
-      @user.tests.where({level: badge.parameter.to_i}).each do |test|
-        current_level_successful.push(test) if test.results.where(successful: true, user: @user).any? && !current_level_successful.include?(test)
+      received_in_badges = []
+      @user.tests.where({ level: badge.parameter.to_i }).each do |test|
+        if test.results.where(successful: true, user: @user).count > received_in_badges.count(test)
+          if received_in_badges.count(test) == count_badge
+            current_level_successful.push(test)
+          end
+          received_in_badges.push(test)
+        end
       end
-
-      add_new_badge(badge) if current_level_successful.sort_by{|e| e[:id]} == Test.where({level: badge.parameter.to_i}).order(:id)
+      current_level_successful.sort_by{ |e| e[:id] } == Test.where({ level: badge.parameter.to_i }).order(:id)
+    else
+      false
     end  
   end
 
-  def new_badge_category?(badge)
+  def category?(badge)
     if @result.test.category.title == badge.parameter && @result.successful?
+      count_badge = @user.badges.where(id: badge.id).count
       current_category_successful = []
+      received_in_badges = []
       @user.tests.joins(:category).where(category: {title: badge.parameter}).each do |test|
-        current_category_successful.push(test) if test.results.where(successful: true, user: @user).any? && !current_category_successful.include?(test)
+        if test.results.where(successful: true, user: @user).count > received_in_badges.count(test)
+          if received_in_badges.count(test) == count_badge
+            current_category_successful.push(test)
+          end
+          received_in_badges.push(test)          
+        end
       end
-      add_new_badge(badge) if current_category_successful.sort_by{|e| e[:id]} == Test.joins(:category).where(category: {title: badge.parameter}).order(:id)
+      current_category_successful.sort_by{ |e| e[:id] } == Test.joins(:category).where(category: { title: badge.parameter }).order(:id)
+    else
+      false
     end
   end
 
-  def new_badge_test?(badge)
-    add_new_badge(badge) if @result.test.title == badge.parameter && @result.successful?
-  end 
+  def test?(badge)
+    @result.test.title == badge.parameter && @result.successful?
+  end
 
-  def new_badge_test_first_try?(badge)
-    if @result.test.title == badge.parameter && @result.successful?
-      add_new_badge(badge) if @user.results.joins(:test).where(test: {title: badge.parameter}, successful: true).count == 1 
-    end
+  def test_first_try?(badge)
+    @result.test.title == badge.parameter && @result.successful? && @user.results.joins(:test).where(test: { title: badge.parameter }).count == 1
   end
 
   def add_new_badge(badge)
