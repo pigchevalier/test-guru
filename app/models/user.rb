@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :tests, through: :results
   has_many :gists, dependent: :destroy
+  has_many :users_badges, dependent: :destroy
+  has_many :badges, through: :users_badges
 
   validates :email, uniqueness: true, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only email allows"}
 

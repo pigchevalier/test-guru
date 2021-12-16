@@ -15,13 +15,19 @@ class Result < ApplicationRecord
   def accept!(answer_ids)
     if correct_answer?(answer_ids)
       self.correct_questions += 1
-    end
-
-    save!
+      
+    end  
+    save!  
   end
 
   def successful?
-    correct_questions/test.questions.count >= PASSING_SCORE
+    if correct_questions/test.questions.count >= PASSING_SCORE
+      self.successful = true 
+      save(validate: false)
+      true
+    else
+      false
+    end 
   end
 
   def number_of_current_question

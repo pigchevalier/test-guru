@@ -15,7 +15,7 @@ class ProgressBar {
 }
 
 document.addEventListener('turbolinks:load', function() {
-  const control = document.querySelector('.test-progress-btn')
+  const control = document.querySelector('.progress-bar')
   if(control) {new ProgressBar()}
 })
 
