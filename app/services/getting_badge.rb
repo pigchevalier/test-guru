@@ -10,41 +10,13 @@ class GettingBadge
   private
 
   def level?(badge)    
-    if @result.test.level == badge.parameter.to_i && @result.successful?
-      count_badge = @user.badges.where(id: badge.id).count
-      current_level_successful = []
-      received_in_badges = []
-      @user.tests.where({ level: badge.parameter.to_i }).each do |test|
-        if test.results.where(successful: true, user: @user).count > received_in_badges.count(test)
-          if received_in_badges.count(test) == count_badge
-            current_level_successful.push(test)
-          end
-          received_in_badges.push(test)
-        end
-      end
-      current_level_successful.sort_by{ |e| e[:id] } == Test.where({ level: badge.parameter.to_i }).order(:id)
-    else
-      false
-    end  
+    new_badge_level = AddNewBadgeLevel.new(badge, @user, @result)
+    new_badge_level.rule
   end
 
   def category?(badge)
-    if @result.test.category.title == badge.parameter && @result.successful?
-      count_badge = @user.badges.where(id: badge.id).count
-      current_category_successful = []
-      received_in_badges = []
-      @user.tests.joins(:category).where(category: {title: badge.parameter}).each do |test|
-        if test.results.where(successful: true, user: @user).count > received_in_badges.count(test)
-          if received_in_badges.count(test) == count_badge
-            current_category_successful.push(test)
-          end
-          received_in_badges.push(test)          
-        end
-      end
-      current_category_successful.sort_by{ |e| e[:id] } == Test.joins(:category).where(category: { title: badge.parameter }).order(:id)
-    else
-      false
-    end
+    new_badge_category = AddNewBadgeCategory.new(badge, @user, @result)
+    new_badge_category.rule
   end
 
   def test?(badge)
