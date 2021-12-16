@@ -1,5 +1,4 @@
 class Admin::TestsController < Admin::BaseController
-
   before_action :find_test, only: [:show, :edit, :destroy, :update, :update_inline]
   before_action :find_tests, only: [:index, :update_inline]
   before_action :find_gists, only: [:index, :update_inline]
@@ -7,7 +6,6 @@ class Admin::TestsController < Admin::BaseController
   def index; end
 
   def show; end
-
 
   def new
     @test = Test.new

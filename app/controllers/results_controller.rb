@@ -1,5 +1,4 @@
 class ResultsController < ApplicationController
-
   before_action :set_result, only: [:show, :update, :result]
 
   def show; end
