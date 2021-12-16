@@ -1,2 +1,2 @@
-<h1 style="color: <%= @result.successful? ? " green" : " red" %>">the <%= @result.test.title %> <%= @result.successful? ? "Test was Completed" : "Test wasn't Completed" %></h1>
+<h1 class = "result-page" style="color: <%= @result.successful? ? " green" : " red" %>">the <%= @result.test.title %> <%= @result.successful? ? "Test was Completed" : "Test wasn't Completed" %></h1>
 <%= link_to 'Back', tests_path %>

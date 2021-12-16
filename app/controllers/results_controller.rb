@@ -4,19 +4,20 @@ class ResultsController < ApplicationController
 
   def show; end
 
-  def result; end
+  def result
+    get_badge = GettingBadge.new
+    get_badge.new_badge(@result, current_user)
+  end
 
   def update
     @result.accept!(params[:answer_ids])
 
     if @result.completed?
-      get_badge = GettingBadge.new
-      get_badge.new_badge(@result, current_user)
       redirect_to result_result_path(@result)
     else
       render :show
     end
-  end
+  end  
 
   private
 
