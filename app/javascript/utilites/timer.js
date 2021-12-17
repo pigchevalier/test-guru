@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', function() {
         control.innerHTML = new Date(time_to_end*1000).toISOString().substr(11,8)
         if (time_to_end == 0){
           clearInterval(timerId)
-          window.location.href = (window.location.pathname + '/result')
+          document.querySelector('form').submit()
         }
         time_to_end--
         localStorage.setItem(window.location.pathname, time_to_end)

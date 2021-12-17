@@ -9,12 +9,11 @@ class TestsController < ApplicationController
   def start
     current_user.tests.push(@test)
     redirect_to current_user.result(@test)
-  end  
+  end
 
   private
 
   def find_test
     @test = Test.find(params[:id])
   end
-
 end

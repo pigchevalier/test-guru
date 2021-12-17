@@ -1,22 +1,21 @@
 class ResultsController < ApplicationController
-  before_action :set_result, only: [:show, :update, :result]
+  before_action :set_result, only: %i[show update result]
 
   def show; end
 
-  def result
-    get_badge = GettingBadge.new
-    get_badge.new_badge(@result, current_user)
-  end
+  def result; end
 
   def update
     @result.accept!(params[:answer_ids])
 
-    if @result.completed?
+    if @result.completed? || @result.created_at + @result.test.timer * 60 < Time.current
+      receive_badge = GettingBadge.new
+      receive_badge.new_badge(@result, current_user)
       redirect_to result_result_path(@result)
     else
       render :show
     end
-  end  
+  end
 
   private
 
