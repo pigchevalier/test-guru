@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
   def update
     @result.accept!(params[:answer_ids])
 
-    if @result.completed? || @result.created_at + @result.test.timer * 60 < Time.current
+    if @result.completed? 
       receive_badge = GettingBadge.new
       receive_badge.new_badge(@result, current_user)
       redirect_to result_result_path(@result)

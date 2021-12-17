@@ -9,7 +9,7 @@ class Result < ApplicationRecord
   PASSING_SCORE = 0.85.freeze
 
   def completed?
-    current_question.nil?
+    current_question.nil? || created_at + test.timer * 60 < Time.current
   end
 
   def accept!(answer_ids)
