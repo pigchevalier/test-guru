@@ -1,5 +1,4 @@
 class Admin::TestsController < Admin::BaseController
-
   before_action :find_test, only: [:show, :edit, :destroy, :update, :update_inline]
   before_action :find_tests, only: [:index, :update_inline]
   before_action :find_gists, only: [:index, :update_inline]
@@ -7,7 +6,6 @@ class Admin::TestsController < Admin::BaseController
   def index; end
 
   def show; end
-
 
   def new
     @test = Test.new
@@ -33,6 +31,7 @@ class Admin::TestsController < Admin::BaseController
 
   def create
     @test = current_user.created_tests.build(test_params)
+    @test.timer
 
     if @test.save
       redirect_to admin_test_path(@test)
@@ -53,7 +52,7 @@ class Admin::TestsController < Admin::BaseController
   end
 
   def test_params
-    params.require(:test).permit(:title, :level, :category_id)
+    params.require(:test).permit(:title, :level, :category_id, :timer)
   end
 
   def find_tests

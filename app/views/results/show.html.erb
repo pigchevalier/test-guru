@@ -21,3 +21,7 @@
   <p><%= link_to 'Gist Question', gists_path(@result), method: :post %></p>
   <p ><%= form.submit 'Next'%></p>
 <% end %>
+
+<label class="timer" data-question-number=<%="#{@result.number_of_current_question}"%> data-timer = <%="#{@result.test.timer*60}"%> >
+    
+</label>

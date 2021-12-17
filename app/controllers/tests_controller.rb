@@ -6,7 +6,6 @@ class TestsController < ApplicationController
     @tests = Test.all
   end
 
-
   def start
     current_user.tests.push(@test)
     redirect_to current_user.result(@test)
@@ -17,5 +16,4 @@ class TestsController < ApplicationController
   def find_test
     @test = Test.find(params[:id])
   end
-
 end
